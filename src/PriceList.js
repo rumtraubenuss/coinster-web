@@ -22,7 +22,6 @@ class PriceList extends Component {
   }
 
   render() {
-    console.log(moment.locale());
     const list = this.state.prices.map((price, count) => {
       const date = moment(price.date).format('ll H:mm:ss');
       return <li key={count}>{price.price_euro} {date}</li>;
