@@ -1,5 +1,5 @@
 .PriceList-item {
-  margin: 2em 0 0 0;
+  margin: 0 0 2em 0;
 }
 
 .PriceList-item:first-child {
@@ -17,7 +17,7 @@
 }
 
 .PriceList-loading {
-  animation: Pricelist-fade .5s infinite alternate;
+  animation: Pricelist-fade .3s infinite alternate;
   font-size: 400%;
 }
 

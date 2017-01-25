@@ -11,6 +11,10 @@ class PriceList extends Component {
   }
 
   componentDidMount() {
+    this.loadData();
+  }
+
+  loadData = () => {
     let API_URL = '';
     if(process.env.NODE_ENV === 'production') {
       API_URL = 'https://coinster-api.herokuapp.com/api/prices';
@@ -22,10 +26,16 @@ class PriceList extends Component {
       .then(json => { this.setState({ prices: json, pristine: false }) });
   }
 
+  handleClick = () => {
+    this.setState({ prices: [], pristine: true });
+    window.setTimeout(this.loadData, 1000);
+  }
+
   render() {
     const { prices, pristine } = this.state;
-    let loader;
+    let loader, reload;
     if(pristine) loader = <span className="PriceList-loading">Loading...</span>;
+    if(!pristine) reload = <button onClick={this.handleClick} type="button">Reload</button>;
     const list = prices.map((price, count) => {
       return (
         <div className="PriceList-item" key={count}>
@@ -38,6 +48,9 @@ class PriceList extends Component {
       <div>
         {loader}
         {list}
+        <div>
+          {reload}
+        </div>
       </div>
     );
   }
