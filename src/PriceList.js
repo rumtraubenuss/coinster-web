@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './PriceList.css';
 import moment from 'moment';
 
 class PriceList extends Component {
@@ -24,9 +25,14 @@ class PriceList extends Component {
   render() {
     const list = this.state.prices.map((price, count) => {
       const date = moment(price.date).format('ll H:mm:ss');
-      return <li key={count}>{price.type} {price.price.toFixed(2)} {date}</li>;
+      return (
+        <li key={count}>
+          <span className="PriceList-coin-type" >{price.type} </span>
+          <span> {price.price.toFixed(2)} {date}</span>
+        </li>
+      );
     });
-    return(
+    return (
       <ul>{list}</ul>
     );
   }
