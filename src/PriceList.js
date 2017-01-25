@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './PriceList.css';
-import moment from 'moment';
 
 class PriceList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       prices: [],
+      pristine: true,
     }
   }
 
@@ -19,21 +19,26 @@ class PriceList extends Component {
     }
     fetch(API_URL)
       .then(res => res.json())
-      .then(json => { this.setState({ prices: json }) });
+      .then(json => { this.setState({ prices: json, pristine: false }) });
   }
 
   render() {
-    const list = this.state.prices.map((price, count) => {
-      const date = moment(price.date).format('ll H:mm:ss');
+    const { prices, pristine } = this.state;
+    let loader;
+    if(pristine) loader = <span className="PriceList-loading">Loading...</span>;
+    const list = prices.map((price, count) => {
       return (
-        <li key={count}>
-          <span className="PriceList-coin-type" >{price.type} </span>
-          <span> {price.price.toFixed(2)} {date}</span>
-        </li>
+        <div className="PriceList-item" key={count}>
+          <h2 className="PriceList-coin-type">{price.type} </h2>
+          <span className="PriceList-price">$ {price.price.toFixed(2)}</span>
+        </div>
       );
     });
     return (
-      <ul>{list}</ul>
+      <div>
+        {loader}
+        {list}
+      </div>
     );
   }
 }

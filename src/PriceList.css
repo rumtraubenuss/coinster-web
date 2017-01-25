@@ -1,3 +1,26 @@
+.PriceList-item {
+  margin: 2em 0 0 0;
+}
+
+.PriceList-item:first-child {
+  margin-top: 0;
+}
+
 .PriceList-coin-type {
   text-transform: capitalize;
+  font-size: 150%;
+  color: #999;
+}
+
+.PriceList-price {
+  font-size: 400%;
+}
+
+.PriceList-loading {
+  animation: Pricelist-fade .5s infinite alternate;
+  font-size: 400%;
+}
+
+@keyframes Pricelist-fade {
+  from { opacity: 0; }
 }
