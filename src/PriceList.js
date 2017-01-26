@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './PriceList.css';
+import { FormattedRelative } from 'react-intl';
 
 class PriceList extends Component {
   constructor(props) {
@@ -23,7 +24,8 @@ class PriceList extends Component {
     }
     fetch(API_URL)
       .then(res => res.json())
-      .then(json => { this.setState({ prices: json, pristine: false }) });
+      .then(json => { this.setState({ prices: json, pristine: false }) })
+      .catch(er => { console.log('Error:', er) });
   }
 
   handleClick = () => {
@@ -51,6 +53,7 @@ class PriceList extends Component {
         <div>
           {reload}
         </div>
+        <FormattedRelative value={(new Date())}/>
       </div>
     );
   }
