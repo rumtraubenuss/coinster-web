@@ -6,6 +6,6 @@ import './index.css';
 import { IntlProvider } from 'react-intl';
 
 ReactDOM.render(
-  <IntlProvider><App /></IntlProvider>,
+  <IntlProvider locale="en"><App /></IntlProvider>,
   document.getElementById('root')
 );

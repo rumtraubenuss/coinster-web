@@ -8,6 +8,8 @@ class PriceList extends Component {
     this.state = {
       prices: [],
       pristine: true,
+      loading: false,
+      lastReloadDate: undefined,
     }
   }
 
@@ -24,20 +26,34 @@ class PriceList extends Component {
     }
     fetch(API_URL)
       .then(res => res.json())
-      .then(json => { this.setState({ prices: json, pristine: false }) })
+      .then(json => {
+        const newState = {
+           prices: json,
+           loading: false,
+           pristine: false,
+           lastReloadDate: new Date(),
+        };
+        this.setState(newState);
+      })
       .catch(er => { console.log('Error:', er) });
   }
 
   handleClick = () => {
-    this.setState({ prices: [], pristine: true });
+    this.setState({ loading: true });
     window.setTimeout(this.loadData, 1000);
   }
 
   render() {
-    const { prices, pristine } = this.state;
-    let loader, reload;
-    if(pristine) loader = <span className="PriceList-loading">Loading...</span>;
-    if(!pristine) reload = <button onClick={this.handleClick} type="button">Reload</button>;
+    const { prices, pristine, loading, lastReloadDate } = this.state;
+    let loader, reload, lastReload;
+    if(loading) loader = <p className="PriceList-loading">Loading...</p>;
+    if(!pristine && !loading) {
+      reload =
+        <button onClick={this.handleClick} type="button">Reload</button>
+    }
+    if(lastReloadDate && !loading) {
+      lastReload = <span> Last reload was <FormattedRelative value={(lastReloadDate)}/></span>
+    }
     const list = prices.map((price, count) => {
       return (
         <div className="PriceList-item" key={count}>
@@ -48,12 +64,10 @@ class PriceList extends Component {
     });
     return (
       <div>
-        {loader}
         {list}
-        <div>
-          {reload}
-        </div>
-        <FormattedRelative value={(new Date())}/>
+        {reload}
+        {loader}
+        {lastReload}
       </div>
     );
   }
