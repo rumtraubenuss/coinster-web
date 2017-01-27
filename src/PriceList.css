@@ -1,19 +1,6 @@
-.PriceList-item {
-  margin: 0 0 2em 0;
-}
-
-.PriceList-item:first-child {
-  margin-top: 0;
-}
-
-.PriceList-coin-type {
+.PriceList .panel-heading {
   text-transform: capitalize;
-  font-size: 150%;
-  color: #999;
-}
-
-.PriceList-price {
-  font-size: 400%;
+  font-weight: bold;
 }
 
 .PriceList-loading {

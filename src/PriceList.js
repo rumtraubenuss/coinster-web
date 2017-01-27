@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './PriceList.css';
 import { FormattedRelative } from 'react-intl';
+import { Panel, Button, Well } from 'react-bootstrap';
 
 class PriceList extends Component {
   constructor(props) {
@@ -45,29 +46,38 @@ class PriceList extends Component {
 
   render() {
     const { prices, pristine, loading, lastReloadDate } = this.state;
-    let loader, reload, lastReload;
-    if(loading) loader = <p className="PriceList-loading">Loading...</p>;
-    if(!pristine && !loading) {
+    let reload;
+    let lastReload = '...';
+    const loadButtonLabel = loading ? "Loading..." : "Reload";
+    if(!pristine) {
       reload =
-        <button onClick={this.handleClick} type="button">Reload</button>
+        <Button
+          onClick={this.handleClick}
+          bsStyle="primary"
+          bsSize="large"
+          block
+          disabled={(loading ? true : false)}
+        >
+          {loadButtonLabel}
+        </Button>
     }
+
     if(lastReloadDate && !loading) {
-      lastReload = <span> Last reload was <FormattedRelative value={(lastReloadDate)}/></span>
+      lastReload =
+        <span>
+        Last reload was <FormattedRelative value={(lastReloadDate)}/>
+        </span>
     }
     const list = prices.map((price, count) => {
       return (
-        <div className="PriceList-item" key={count}>
-          <h2 className="PriceList-coin-type">{price.type} </h2>
-          <span className="PriceList-price">$ {price.price.toFixed(2)}</span>
-        </div>
+        <Panel key={count} header={price.type} >$ {price.price.toFixed(2)}</Panel>
       );
     });
     return (
-      <div>
+      <div className="PriceList">
         {list}
+        <Well bsSize="small">{lastReload}</Well>
         {reload}
-        {loader}
-        {lastReload}
       </div>
     );
   }
