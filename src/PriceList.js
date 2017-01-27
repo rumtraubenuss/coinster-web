@@ -62,7 +62,7 @@ class PriceList extends Component {
         </Button>
     }
 
-    if(lastReloadDate && !loading) {
+    if(lastReloadDate && !loading && !pristine) {
       lastReload =
         <span>
         Last reload was <FormattedRelative value={(lastReloadDate)}/>
