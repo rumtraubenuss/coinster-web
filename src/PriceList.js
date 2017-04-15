@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './PriceList.css';
 import { FormattedRelative } from 'react-intl';
 import { Panel, Button, Well, Grid, Row, Col } from 'react-bootstrap';
+import moment from 'moment';
 
 class PriceList extends Component {
   constructor(props) {
@@ -76,10 +77,11 @@ class PriceList extends Component {
         <Panel key={count} header={price.type}>
           <Grid fluid>
             <Row className="show-grid">
-              <Col xs={3}><strong>$ {price.price.toFixed(2)}</strong></Col>
-              <Col xs={3}><small>{prices_24[count].date}</small></Col>
-              <Col xs={3}><small>24h +0.1%</small></Col>
-              <Col xs={3}><small>Reload -0.5%</small></Col>
+              <Col xs={8}>
+                <strong>$ {price.price.toFixed(2)} </strong>
+                <small>{moment(price.date).calendar()}</small>
+              </Col>
+              <Col xs={4}><small>-24h: {prices_24[count].price.toFixed(2)}</small></Col>
             </Row>
           </Grid>
         </Panel>
