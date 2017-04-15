@@ -3,6 +3,11 @@
   font-weight: bold;
 }
 
+.PriceList .container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .PriceList-loading {
   animation: Pricelist-fade .3s infinite alternate;
   font-size: 400%;
