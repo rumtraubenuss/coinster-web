@@ -9,7 +9,6 @@ class PriceList extends Component {
     super(props);
     this.state = {
       prices: [],
-      prices_24: [],
       pristine: true,
       loading: false,
       lastReloadDate: undefined,
@@ -27,19 +26,16 @@ class PriceList extends Component {
     } else {
       API_URL = 'http://localhost:8000/api/prices';
     }
-    Promise.all([fetch(API_URL), fetch(API_URL + '?offset=1')])
-      .then((promises) => {
-        Promise.all(promises.map(data => data.json()))
-          .then(([json1, json2]) => {
-            const newState = {
-              prices: json1,
-              prices_24: json2,
-              loading: false,
-              pristine: false,
-              lastReloadDate: new Date(),
-            };
-            this.setState(newState);
-          });
+    fetch(API_URL)
+      .then(res => res.json())
+      .then(json => {
+        const newState = {
+          prices: json,
+          loading: false,
+          pristine: false,
+          lastReloadDate: new Date(),
+        };
+        this.setState(newState);
       });
   }
 
@@ -49,7 +45,7 @@ class PriceList extends Component {
   }
 
   render() {
-    const { prices, prices_24, pristine, loading, lastReloadDate } = this.state;
+    const { prices, pristine, loading, lastReloadDate } = this.state;
     let reload;
     let lastReload = '...';
     const loadButtonLabel = loading ? "Loading..." : "Reload";
@@ -72,20 +68,21 @@ class PriceList extends Component {
         Last reload was <FormattedRelative value={(lastReloadDate)}/>
         </span>
     }
-    const list = prices.map((price, count) => {
+    const list = Object.keys(prices).map((type, count) => {
+      const price = this.state.prices[type][0];
       return (
         <Panel key={count} header={price.type}>
           <Grid fluid>
             <Row className="show-grid">
               <Col xs={8}>
-                <strong>$ {price.price.toFixed(2)} </strong>
+                <strong>{price.price.toFixed('2')} </strong>
                 <small>{moment(price.date).calendar()}</small>
               </Col>
-              <Col xs={4}><small>-24h: {prices_24[count].price.toFixed(2)}</small></Col>
+              <Col xs={4}><small>-24h:</small></Col>
             </Row>
           </Grid>
         </Panel>
-      );
+      )
     });
     return (
       <div className="PriceList">
