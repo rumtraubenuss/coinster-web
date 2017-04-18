@@ -75,15 +75,21 @@ class PriceList extends Component {
       const price = prices[type][0];
       const trendPercent = ((price.price / priceLast.price - 1) * 100).toFixed(2);
       const trendDirection = trendPercent >= 0 ? '+' : '-';
+      let trendClass;
+      if(trendPercent >= 0) {
+        trendClass = 'text-success';
+      } else {
+        trendClass = 'text-danger';
+      }
       return (
         <Panel key={count} header={price.type}>
           <Grid fluid>
             <Row className="show-grid">
-              <Col xs={8}>
+              <Col xs={12}>
                 <strong>{price.price.toFixed('2')} </strong>
+                <small className={trendClass}>{trendDirection}{trendPercent}% </small>
                 <small>{moment(price.date).calendar()}</small>
               </Col>
-              <Col xs={4}><small>24h: {trendDirection}{trendPercent}%</small></Col>
             </Row>
           </Grid>
         </Panel>
