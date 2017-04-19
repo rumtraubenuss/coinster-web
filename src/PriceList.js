@@ -74,7 +74,7 @@ class PriceList extends Component {
       const priceLast = last(prices[type]);
       const price = prices[type][0];
       const trendPercent = ((price.price / priceLast.price - 1) * 100).toFixed(2);
-      const trendDirection = trendPercent >= 0 ? '+' : '-';
+      const trendDirection = trendPercent >= 0 ? '+' : '';
       let trendClass;
       if(trendPercent >= 0) {
         trendClass = 'text-success';
