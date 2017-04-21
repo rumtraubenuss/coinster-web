@@ -4,6 +4,7 @@ import { FormattedRelative } from 'react-intl';
 import { Panel, Button, Well, Grid, Row, Col } from 'react-bootstrap';
 import moment from 'moment';
 import last from 'ramda/src/last';
+import Chart from './Chart';
 
 class PriceList extends Component {
   constructor(props) {
@@ -71,9 +72,9 @@ class PriceList extends Component {
     }
     const list = Object.keys(prices).map((type, count) => {
       const { prices } = this.state;
-      const priceLast = last(prices[type]);
+      const priceOld = last(prices[type]);
       const price = prices[type][0];
-      const trendPercent = ((price.price / priceLast.price - 1) * 100).toFixed(2);
+      const trendPercent = ((price.price / priceOld.price - 1) * 100).toFixed(2);
       const trendDirection = trendPercent >= 0 ? '+' : '';
       let trendClass;
       if(trendPercent >= 0) {
@@ -89,6 +90,11 @@ class PriceList extends Component {
                 <strong>{price.price.toFixed('2')} </strong>
                 <small className={trendClass}>{trendDirection}{trendPercent}% </small>
                 <small>{moment(price.date).calendar()}</small>
+              </Col>
+            </Row>
+            <Row>
+              <Col xs={12}>
+                <Chart values={prices[type].reverse()} />
               </Col>
             </Row>
           </Grid>

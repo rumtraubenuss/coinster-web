@@ -5,8 +5,9 @@ const barStyle = {
   width: '1px',
   backgroundColor: 'red',
   margin: '0',
-  height: '10px',
+  height: '1px',
 };
+const displayHeight = 50;
 
 const getMaxMin = values => (
   values.reduce((acc, val) => ({
@@ -16,10 +17,12 @@ const getMaxMin = values => (
 );
 
 const Chart = ({ values = [] }) => {
-  console.log(getMaxMin(values.map(val => val.price)));
+  const { min, max } = getMaxMin(values.map(val => val.price));
+  const coefficient = displayHeight / (max - min);
+
   const bars = values.map((val, n) => {
     return (
-      <div style={{ ...barStyle, height: `${Math.round(val.price / 10)}px` }} key={n}></div>
+      <div style={{ ...barStyle, marginBottom: `${Math.round((val.price - min) * coefficient)}px` }} key={n}></div>
     );
   });
   return (
