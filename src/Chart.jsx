@@ -5,7 +5,7 @@ const barStyle = {
   width: '1px',
   backgroundColor: 'red',
   margin: '0',
-  height: '1px',
+  height: '2px',
 };
 const displayHeight = 50;
 
