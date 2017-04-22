@@ -85,7 +85,7 @@ class PriceList extends Component {
       return (
         <Panel key={count} header={price.type}>
           <Grid fluid>
-            <Row className="show-grid">
+            <Row>
               <Col xs={12}>
                 <strong>{price.price.toFixed('2')} </strong>
                 <small className={trendClass}>{trendDirection}{trendPercent}% </small>

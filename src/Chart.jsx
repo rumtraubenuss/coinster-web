@@ -1,12 +1,5 @@
 import React from 'react';
 
-const barStyle = {
-  display: 'inline-block',
-  width: '1px',
-  backgroundColor: 'red',
-  margin: '0',
-  height: '2px',
-};
 const displayHeight = 50;
 
 const getMaxMin = values => (
@@ -19,14 +12,25 @@ const getMaxMin = values => (
 const Chart = ({ values = [] }) => {
   const { min, max } = getMaxMin(values.map(val => val.price));
   const coefficient = displayHeight / (max - min);
-
-  const bars = values.map((val, n) => {
+  const graphLines = values.map((val, n) => {
+    let posY;
+    if (n < values.length - 1) {
+      posY = {
+        y1: displayHeight - (val.price - min) * coefficient,
+        y2: displayHeight - (values[n + 1].price - min) * coefficient,
+      };
+    }
     return (
-      <div style={{ ...barStyle, marginBottom: `${Math.round((val.price - min) * coefficient)}px` }} key={n}></div>
+        <line key={n} x1={n} x2={n + 1} {...posY} style={{stroke: '#333', strokeWidth: 0.2}} />
     );
   });
+  const graph = (
+      <svg width="100%" height={displayHeight} viewBox={`0 0 ${values.length - 1} ${displayHeight}`} preserveAspectRatio="none">
+        {graphLines}
+      </svg>
+  );
   return (
-    <div>{bars}</div>
+    <div className="Chart">{graph}</div>
   );
 };
 
