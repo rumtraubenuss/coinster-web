@@ -94,7 +94,7 @@ class PriceList extends Component {
             </Row>
             <Row>
               <Col xs={12}>
-                <Chart values={prices[type].reverse()} />
+                <Chart values={[...prices[type]].reverse()} />
               </Col>
             </Row>
           </Grid>
