@@ -7,3 +7,8 @@
 .Chart {
   margin-top: 10px;
 }
+
+.maxMin {
+  display: block;
+  text-align: right;
+}

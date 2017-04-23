@@ -21,16 +21,31 @@ const Chart = ({ values = [] }) => {
       };
     }
     return (
-        <line key={n} x1={n} x2={n + 1} {...posY} style={{stroke: '#333', strokeWidth: 0.2}} />
+      <line
+        key={n}
+        x1={n}
+        x2={n + 1} {...posY}
+        style={{stroke: '#333', strokeWidth: 0.2}}
+      />
     );
   });
   const graph = (
-      <svg width="100%" height={displayHeight} viewBox={`0 0 ${values.length - 1} ${displayHeight}`} preserveAspectRatio="none">
-        {graphLines}
-      </svg>
+    <svg
+      width="100%"
+      height={displayHeight}
+      viewBox={`0 0 ${values.length - 1} ${displayHeight}`}
+      preserveAspectRatio="none"
+      style={{ display: 'block'}}
+    >
+      {graphLines}
+    </svg>
   );
   return (
-    <div className="Chart">{graph}</div>
+    <div className="Chart">
+      <small className="maxMin">{max.toFixed(2)}</small>
+      {graph}
+      <small className="maxMin">{min.toFixed(2)}</small>
+    </div>
   );
 };
 
