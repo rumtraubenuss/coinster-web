@@ -12,23 +12,11 @@ const getMaxMin = values => (
 const Chart = ({ values = [] }) => {
   const { min, max } = getMaxMin(values.map(val => val.price));
   const coefficient = displayHeight / (max - min);
-  const graphLines = values.map((val, n) => {
-    let posY;
-    if (n < values.length - 1) {
-      posY = {
-        y1: displayHeight - (val.price - min) * coefficient,
-        y2: displayHeight - (values[n + 1].price - min) * coefficient,
-      };
-    }
-    return (
-      <line
-        key={n}
-        x1={n}
-        x2={n + 1} {...posY}
-        style={{stroke: '#333', strokeWidth: 0.2}}
-      />
-    );
+  let pathString = `M0 ${displayHeight}`;
+  values.forEach((val, n) => {
+    pathString = pathString.concat(` L${n} ${(displayHeight - (val.price - min) * coefficient).toFixed(0)}`);
   });
+  pathString = pathString.concat(` L${values.length - 1} ${displayHeight}`);
   const graph = (
     <svg
       width="100%"
@@ -37,7 +25,7 @@ const Chart = ({ values = [] }) => {
       preserveAspectRatio="none"
       style={{ display: 'block'}}
     >
-      {graphLines}
+      <path d={pathString} fill="black" fillOpacity="0.2" stroke="black" strokeWidth=".5" vectorEffect="non-scaling-stroke" />
     </svg>
   );
   return (
