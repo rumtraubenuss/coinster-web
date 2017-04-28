@@ -82,8 +82,9 @@ class PriceList extends Component {
       } else {
         trendClass = 'text-danger';
       }
+      const headerItem = <div>{price.type}</div>
       return (
-        <Panel key={count} header={price.type}>
+        <Panel key={count} header={headerItem}>
           <Grid fluid>
             <Row>
               <Col xs={12}>
