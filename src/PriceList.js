@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './PriceList.css';
 import { FormattedRelative } from 'react-intl';
-import { Panel, Button, Well, Grid, Row, Col } from 'react-bootstrap';
+import { Panel, Button, Well, Grid, Row, Col, Glyphicon } from 'react-bootstrap';
 import moment from 'moment';
 import last from 'ramda/src/last';
 import Chart from './Chart';
@@ -86,7 +86,7 @@ class PriceList extends Component {
       } else {
         trendClass = 'text-danger';
       }
-      const headerItem = <div>{price.type}<span onClick={this.handleToggleExpand} className="pull-right">x</span></div>
+      const headerItem = <div>{price.type}<Glyphicon onClick={this.handleToggleExpand} className="pull-right" glyph="menu-down" /></div>
       return (
         <Panel key={count} header={headerItem}>
           <Grid fluid>
