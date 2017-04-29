@@ -46,6 +46,10 @@ class PriceList extends Component {
     window.setTimeout(this.loadData, 1000);
   }
 
+  handleToggleExpand = () => {
+    console.log('foo');
+  }
+
   render() {
     const { prices, pristine, loading, lastReloadDate } = this.state;
     let reload;
@@ -82,7 +86,7 @@ class PriceList extends Component {
       } else {
         trendClass = 'text-danger';
       }
-      const headerItem = <div>{price.type}</div>
+      const headerItem = <div>{price.type}<span onClick={this.handleToggleExpand} className="pull-right">x</span></div>
       return (
         <Panel key={count} header={headerItem}>
           <Grid fluid>
