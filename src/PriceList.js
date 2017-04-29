@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './PriceList.css';
 import { FormattedRelative } from 'react-intl';
-import { Panel, Button, Well, Grid, Row, Col, Glyphicon } from 'react-bootstrap';
+import { Panel, Button, Well, Grid, Row, Col } from 'react-bootstrap';
 import moment from 'moment';
 import last from 'ramda/src/last';
 import Chart from './Chart';
+import PanelHeader from './PanelHeader';
 
 class PriceList extends Component {
   constructor(props) {
@@ -86,7 +87,8 @@ class PriceList extends Component {
       } else {
         trendClass = 'text-danger';
       }
-      const headerItem = <div>{price.type}<Glyphicon onClick={this.handleToggleExpand} className="pull-right" glyph="menu-down" /></div>
+      const panelHeaderProps = { priceType: price.type, toggleDetails: this.handleToggleExpand };
+      const headerItem = <PanelHeader {...panelHeaderProps} />;
       return (
         <Panel key={count} header={headerItem}>
           <Grid fluid>
