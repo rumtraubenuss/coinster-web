@@ -8,10 +8,11 @@ class PriceList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      prices: [],
+      prices: {},
       pristine: true,
       loading: false,
       lastReloadDate: undefined,
+      minimizedPanels: [],
     }
   }
 
@@ -44,8 +45,10 @@ class PriceList extends Component {
     window.setTimeout(this.loadData, 1000);
   }
 
-  handleToggleExpand = () => {
-    console.log('foo');
+  handleToggleExpand = (type) => {
+    const { minimizedPanels: prev } = this.state;
+    const next = prev.includes(type) ? prev.filter(val => val !== type) : [...prev, type];
+    this.setState({ minimizedPanels: next });
   }
 
   render() {
@@ -73,9 +76,13 @@ class PriceList extends Component {
         </span>
     }
     const list = Object.keys(prices).map((type, count) => {
-      const { prices } = this.state;
+      const { prices, minimizedPanels } = this.state;
       return (
-        <DetailPanel key={count} handleToggleExpand={this.handleToggleExpand} {...{ prices, type, count }} />
+        <DetailPanel
+          key={count}
+          handleToggleExpand={() => this.handleToggleExpand(type)}
+          {...{ prices, type, count, minimizedPanels }}
+        />
       )
     });
     return (

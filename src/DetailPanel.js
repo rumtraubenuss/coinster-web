@@ -5,7 +5,7 @@ import moment from 'moment';
 import PanelHeader from './PanelHeader';
 import last from 'ramda/src/last';
 
-const DetailPanel = ({ prices, type, count, handleToggleExpand }) => {
+const DetailPanel = ({ prices, type, count, handleToggleExpand, minimizedPanels }) => {
   const priceOld = last(prices[type]);
   const price = prices[type][0];
   const trendPercent = ((price.price / priceOld.price - 1) * 100).toFixed(2);
@@ -43,6 +43,7 @@ DetailPanel.propTypes = {
   type: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
   handleToggleExpand: PropTypes.func.isRequired,
+  minimizedPanels: PropTypes.array.isRequired,
 };
 
 export default DetailPanel;
