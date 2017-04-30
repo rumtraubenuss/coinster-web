@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
 import './PriceList.css';
 import { FormattedRelative } from 'react-intl';
-import { Panel, Button, Well, Grid, Row, Col } from 'react-bootstrap';
-import moment from 'moment';
-import last from 'ramda/src/last';
-import Chart from './Chart';
-import PanelHeader from './PanelHeader';
+import { Button, Well } from 'react-bootstrap';
+import DetailPanel from './DetailPanel';
 
 class PriceList extends Component {
   constructor(props) {
@@ -77,35 +74,8 @@ class PriceList extends Component {
     }
     const list = Object.keys(prices).map((type, count) => {
       const { prices } = this.state;
-      const priceOld = last(prices[type]);
-      const price = prices[type][0];
-      const trendPercent = ((price.price / priceOld.price - 1) * 100).toFixed(2);
-      const trendDirection = trendPercent >= 0 ? '+' : '';
-      let trendClass;
-      if(trendPercent >= 0) {
-        trendClass = 'text-success';
-      } else {
-        trendClass = 'text-danger';
-      }
-      const panelHeaderProps = { priceType: price.type, toggleDetails: this.handleToggleExpand };
-      const headerItem = <PanelHeader {...panelHeaderProps} />;
       return (
-        <Panel key={count} header={headerItem}>
-          <Grid fluid>
-            <Row>
-              <Col xs={12}>
-                <strong>{price.price.toFixed('2')} </strong>
-                <small className={trendClass}>{trendDirection}{trendPercent}% </small>
-                <small>{moment(price.date).calendar()}</small>
-              </Col>
-            </Row>
-            <Row>
-              <Col xs={12}>
-                <Chart values={[...prices[type]].reverse()} />
-              </Col>
-            </Row>
-          </Grid>
-        </Panel>
+        <DetailPanel key={count} handleToggleExpand={this.handleToggleExpand} {...{ prices, type, count }} />
       )
     });
     return (
