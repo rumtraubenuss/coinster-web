@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 const PanelHeader = ({ price, priceType, toggleDetails, priceVisible = false }) => {
   const priceClassNames = classNames({ hidden: !priceVisible });
+  const iconType = priceVisible ? 'down' : 'up';
   return (
     <div>
       <span>{priceType}</span>
@@ -11,7 +12,7 @@ const PanelHeader = ({ price, priceType, toggleDetails, priceVisible = false }) 
       <Glyphicon
         onClick={toggleDetails}
         className="pull-right"
-        glyph="menu-down"
+        glyph={`menu-${iconType}`}
       />
     </div>
   );
