@@ -17,9 +17,14 @@ const DetailPanel = ({ prices, type, count, handleToggleExpand, minimizedPanels 
   } else {
     trendClass = 'text-danger';
   }
-  const panelHeaderProps = { priceType: price.type, toggleDetails: handleToggleExpand };
+  const isPanelMinimized = minimizedPanels.includes(type);
+  const panelHeaderProps = {
+    price,priceType: price.type,
+    toggleDetails: handleToggleExpand,
+    priceVisible: isPanelMinimized
+  };
   const headerItem = <PanelHeader {...panelHeaderProps} />;
-  const panelClassNames = classNames({ 'DetailPanel-hidden': minimizedPanels.includes(type) });
+  const panelClassNames = classNames({ 'DetailPanel-hidden': isPanelMinimized });
   return (
     <Panel className={panelClassNames} key={count} header={headerItem}>
       <Grid fluid>
