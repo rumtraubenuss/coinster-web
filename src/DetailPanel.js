@@ -4,6 +4,7 @@ import Chart from './Chart';
 import moment from 'moment';
 import PanelHeader from './PanelHeader';
 import last from 'ramda/src/last';
+import classNames from 'classnames';
 
 const DetailPanel = ({ prices, type, count, handleToggleExpand, minimizedPanels }) => {
   const priceOld = last(prices[type]);
@@ -18,8 +19,9 @@ const DetailPanel = ({ prices, type, count, handleToggleExpand, minimizedPanels 
   }
   const panelHeaderProps = { priceType: price.type, toggleDetails: handleToggleExpand };
   const headerItem = <PanelHeader {...panelHeaderProps} />;
+  const panelClassNames = classNames({ 'DetailPanel-hidden': minimizedPanels.includes(type) });
   return (
-    <Panel key={count} header={headerItem}>
+    <Panel className={panelClassNames} key={count} header={headerItem}>
       <Grid fluid>
         <Row>
           <Col xs={12}>

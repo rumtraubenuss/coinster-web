@@ -12,3 +12,7 @@
   display: block;
   text-align: right;
 }
+
+.DetailPanel-hidden .panel-body {
+  display: none;
+}
