@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { object, string, func, bool } from 'prop-types';
 import { Glyphicon } from 'react-bootstrap';
 import classNames from 'classnames';
 
@@ -19,10 +20,10 @@ const PanelHeader = ({ price, priceType, toggleDetails, priceVisible = false }) 
 };
 
 PanelHeader.propTypes = {
-  price: PropTypes.object.isRequired,
-  priceType: PropTypes.string.isRequired,
-  toggleDetails: PropTypes.func.isRequired,
-  priceVisible: PropTypes.bool,
+  price: object.isRequired,
+  priceType: string.isRequired,
+  toggleDetails: func.isRequired,
+  priceVisible: bool,
 };
 
 export default PanelHeader;

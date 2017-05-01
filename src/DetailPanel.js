@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { object, string, func, number, array } from 'prop-types';
 import { Panel, Grid, Row, Col } from 'react-bootstrap';
 import Chart from './Chart';
 import moment from 'moment';
@@ -46,11 +47,11 @@ const DetailPanel = ({ prices, type, count, handleToggleExpand, minimizedPanels 
 };
 
 DetailPanel.propTypes = {
-  prices: PropTypes.object.isRequired,
-  type: PropTypes.string.isRequired,
-  count: PropTypes.number.isRequired,
-  handleToggleExpand: PropTypes.func.isRequired,
-  minimizedPanels: PropTypes.array.isRequired,
+  prices: object.isRequired,
+  type: string.isRequired,
+  count: number.isRequired,
+  handleToggleExpand: func.isRequired,
+  minimizedPanels: array.isRequired,
 };
 
 export default DetailPanel;
