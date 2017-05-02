@@ -3,16 +3,23 @@ import './PriceList.css';
 import { FormattedRelative } from 'react-intl';
 import { Button, Well } from 'react-bootstrap';
 import DetailPanel from './DetailPanel';
+import cookies from 'js-cookie';
+
+const cookieNameMinimizedPanels = 'cnstrMinPan';
 
 class PriceList extends Component {
   constructor(props) {
     super(props);
+
+    const cookieMinPanels = cookies.get(cookieNameMinimizedPanels);
+    const minimizedPanels = cookieMinPanels ? JSON.parse(cookieMinPanels) : [];
+
     this.state = {
       prices: {},
       pristine: true,
       loading: false,
       lastReloadDate: undefined,
-      minimizedPanels: [],
+      minimizedPanels,
     }
   }
 
@@ -49,6 +56,7 @@ class PriceList extends Component {
     const { minimizedPanels: prev } = this.state;
     const next = prev.includes(type) ? prev.filter(val => val !== type) : [...prev, type];
     this.setState({ minimizedPanels: next });
+    cookies.set(cookieNameMinimizedPanels, JSON.stringify(next));
   }
 
   render() {
