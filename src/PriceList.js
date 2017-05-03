@@ -56,7 +56,7 @@ class PriceList extends Component {
     const { minimizedPanels: prev } = this.state;
     const next = prev.includes(type) ? prev.filter(val => val !== type) : [...prev, type];
     this.setState({ minimizedPanels: next });
-    cookies.set(cookieNameMinimizedPanels, JSON.stringify(next));
+    cookies.set(cookieNameMinimizedPanels, JSON.stringify(next), { expires: 365 });
   }
 
   render() {
