@@ -3,7 +3,8 @@
   "version": "0.1.1",
   "private": true,
   "devDependencies": {
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "s3-deploy": "^0.7.5"
   },
   "dependencies": {
     "classnames": "^2.2.5",
