@@ -30,7 +30,7 @@ class PriceList extends Component {
   loadData = () => {
     let API_URL = '';
     if(process.env.NODE_ENV === 'production') {
-      API_URL = 'https://coinster-api.herokuapp.com/api/prices';
+      API_URL = 'https://2i81tl0clc.execute-api.eu-west-1.amazonaws.com/test/prices';
     } else {
       API_URL = 'http://localhost:8000/api/prices';
     }
