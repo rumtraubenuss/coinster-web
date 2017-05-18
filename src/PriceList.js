@@ -49,7 +49,7 @@ class PriceList extends Component {
 
   handleClick = () => {
     this.setState({ loading: true });
-    window.setTimeout(this.loadData, 1000);
+    this.loadData();
   }
 
   handleToggleExpand = (type) => {
