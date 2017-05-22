@@ -33,7 +33,7 @@ const DetailPanel = ({ prices, type, count, handleToggleExpand, minimizedPanels 
           <Col xs={12}>
             <strong>{price.price.toFixed('2')} </strong>
             <small className={trendClass}>{trendDirection}{trendPercent}% </small>
-            <small>{moment(price.date).calendar()}</small>
+            <small>{moment(price.date.$date).calendar()}</small>
           </Col>
         </Row>
         <Row>
