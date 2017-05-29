@@ -5,19 +5,12 @@ import Chart from './Chart';
 import moment from 'moment';
 import PanelHeader from './PanelHeader';
 import last from 'ramda/src/last';
+import PriceTrend from './PriceTrend';
 import classNames from 'classnames';
 
 const DetailPanel = ({ prices, type, count, handleToggleExpand, minimizedPanels }) => {
   const priceOld = last(prices[type]);
   const price = prices[type][0];
-  const trendPercent = ((price.price / priceOld.price - 1) * 100).toFixed(2);
-  const trendDirection = trendPercent >= 0 ? '+' : '';
-  let trendClass;
-  if(trendPercent >= 0) {
-    trendClass = 'text-success';
-  } else {
-    trendClass = 'text-danger';
-  }
   const isPanelMinimized = minimizedPanels.includes(type);
   const panelHeaderProps = {
     price,priceType: price.type,
@@ -32,7 +25,10 @@ const DetailPanel = ({ prices, type, count, handleToggleExpand, minimizedPanels 
         <Row>
           <Col xs={12}>
             <strong>{price.price.toFixed('2')} </strong>
-            <small className={trendClass}>{trendDirection}{trendPercent}% </small>
+            <PriceTrend
+              price={price.price}
+              priceOld={priceOld.price}
+            />
             <small>{moment(price.date.$date).calendar()}</small>
           </Col>
         </Row>
