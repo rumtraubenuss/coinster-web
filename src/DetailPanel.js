@@ -13,7 +13,9 @@ const DetailPanel = ({ prices, type, count, handleToggleExpand, minimizedPanels 
   const price = prices[type][0];
   const isPanelMinimized = minimizedPanels.includes(type);
   const panelHeaderProps = {
-    price,priceType: price.type,
+    price,
+    priceOld,
+    priceType: price.type,
     toggleDetails: handleToggleExpand,
     priceVisible: isPanelMinimized
   };
