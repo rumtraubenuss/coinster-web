@@ -10,7 +10,7 @@ function FieldGroup({ id, label, help, ...props }) {
   );
 }
 
-const LoginForm = () => (
+const LoginForm = ({ foo, doFoo }) => (
   <div>
     <form>
       <FieldGroup
@@ -24,6 +24,7 @@ const LoginForm = () => (
         placeholder="Password"
       />
     </form>
+    <button type="button" onClick={doFoo}>{foo}</button>
   </div>
 );
 
