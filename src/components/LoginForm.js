@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
 import { FormGroup, FormControl, ControlLabel, HelpBlock } from 'react-bootstrap';
 
 function FieldGroup({ id, label, help, ...props }) {
@@ -24,7 +25,13 @@ const LoginForm = ({ foo, doFoo }) => (
         placeholder="Password"
       />
     </form>
-    <button type="button" onClick={doFoo}>{foo}</button>
+    <Button
+      onClick={doFoo}
+      bsStyle="primary"
+      bsSize="large"
+      block
+      disabled={false}
+    >{foo}</Button>
   </div>
 );
 
