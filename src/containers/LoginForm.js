@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import LoginForm from '../components/LoginForm';
-import { doFoo } from '../actions';
+import { doFoo } from '../ducks/foo';
 
 const mapStateToProps = () => ({
   foo: 'FOO',
