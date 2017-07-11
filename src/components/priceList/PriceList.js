@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import './PriceList.css';
 import { FormattedRelative } from 'react-intl';
 import { Button, Well } from 'react-bootstrap';
-import DetailPanel from './DetailPanel';
 import cookies from 'js-cookie';
+
+import './PriceList.css';
+import DetailPanel from '../detailPanel/DetailPanel';
 
 const cookieNameMinimizedPanels = 'cnstrMinPan';
 

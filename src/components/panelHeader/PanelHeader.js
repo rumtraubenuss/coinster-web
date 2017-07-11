@@ -2,7 +2,7 @@ import React from 'react';
 import { object, string, func, bool } from 'prop-types';
 import { Glyphicon } from 'react-bootstrap';
 import classNames from 'classnames';
-import PriceTrend from './PriceTrend';
+import PriceTrend from '../priceTrend/PriceTrend';
 
 const PanelHeader = props => {
   const { price,

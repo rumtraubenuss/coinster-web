@@ -1,11 +1,11 @@
 import React from 'react';
 import { object, string, func, number, array } from 'prop-types';
 import { Panel, Grid, Row, Col } from 'react-bootstrap';
-import Chart from './Chart';
+import Chart from '../chart/Chart';
 import moment from 'moment';
-import PanelHeader from './PanelHeader';
+import PanelHeader from '../panelHeader/PanelHeader';
 import last from 'ramda/src/last';
-import PriceTrend from './PriceTrend';
+import PriceTrend from '../priceTrend/PriceTrend';
 import classNames from 'classnames';
 
 const DetailPanel = ({ prices, type, count, handleToggleExpand, minimizedPanels }) => {
