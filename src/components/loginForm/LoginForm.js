@@ -35,4 +35,6 @@ const LoginForm = ({ foo, doFoo }) => (
   </div>
 );
 
-export default LoginForm;
+export default () => false;
+
+// export default LoginForm;
