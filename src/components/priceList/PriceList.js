@@ -31,15 +31,17 @@ class PriceList extends Component {
   loadData = () => {
     let API_URL = '';
     if(process.env.NODE_ENV === 'production') {
-      API_URL = 'http://coinster.projectz.de/prices.json';
+      // API_URL = 'http://coinster.projectz.de/prices.json';
+      API_URL = 'https://europe-west3-coinster.cloudfunctions.net/api-coinster';
     } else {
-      API_URL = 'http://localhost:8000/api/prices';
+      // API_URL = 'http://localhost:8000/api/prices';
+      API_URL = 'https://europe-west3-coinster.cloudfunctions.net/api-coinster';
     }
     fetch(API_URL)
       .then(res => res.json())
       .then(json => {
         const newState = {
-          prices: json,
+          prices: json.data,
           loading: false,
           pristine: false,
           lastReloadDate: new Date(),
