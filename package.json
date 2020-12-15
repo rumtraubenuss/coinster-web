@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {
     "react-scripts": "0.9.5",
-    "s3-deploy": "^0.7.5"
+    "s3-deploy": "^0.7.6"
   },
   "dependencies": {
     "classnames": "^2.2.5",
@@ -25,6 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "yarn build && s3-deploy './build/**' --cwd './build' --region eu-central-1 --bucket coinster.projectz.de"
+    "s3": "s3-deploy './build/**' --cwd './build' --region eu-central-1 --bucket coinster.projectz.de",
+    "deploy": "yarn build && npm run s3"
   }
 }
